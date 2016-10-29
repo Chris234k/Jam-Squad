@@ -68,8 +68,8 @@ public class AttachablePart : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Collides with ObstacleWall
-        if (collision.gameObject.layer == 9)
+        // Collides with ObstacleWall or Enemy
+        if (collision.gameObject.layer == 9 || collision.gameObject.layer == 11)
         {
             Debug.Log("COLLISION VEL: " + collision.relativeVelocity.magnitude);
             //TODO Need to find appropriate factors to justify breakage
