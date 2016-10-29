@@ -31,7 +31,7 @@ public class AttachablePart : MonoBehaviour{
 		fixedJoint 					= this.gameObject.AddComponent<FixedJoint> ();
 		fixedJoint.connectedBody 	= connectedPart.GetComponent<Rigidbody>();
 		fixedJoint.enableCollision 	= false;
-
+        PlayerController.instance.AttachPart(this);
 		OnJointBreak += HandleOnJointBreak;
 
 	}
