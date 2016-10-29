@@ -24,6 +24,7 @@ public class OnDestroySpawner : Spawner
 	#endregion
 
 	private void onSpawnableDestroyed(SpawnableBehavior spawnable) {
+		spawnable.Destroyed -= onSpawnableDestroyed;
 		spawn ();
 	}
 }
