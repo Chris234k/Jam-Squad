@@ -26,4 +26,9 @@ public class Obstacle : SpawnableBehavior
     {
         transform.eulerAngles += spinRate * Time.deltaTime;
     }
+
+    protected Vector3 GetPointInSphere(float radius, Vector3 center)
+    {
+        return Random.insideUnitSphere * radius + center;
+    }
 }
