@@ -6,9 +6,12 @@ public class PartAttachment : MonoBehaviour {
 	[SerializeField]
 	private AttachablePart part;
 
+	[SerializeField]
+	private float rotationSpeed = 45.0f;
+
 	private bool placingPart = false;
-
-
+	private AttachablePart currentNewPart;
+	private AttachablePart currentHitPart;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,10 +19,32 @@ public class PartAttachment : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
+		if (placingPart)
+		{
+			if (PlayerController.instance.gameStarted)
+			{
+				Destroy (currentNewPart);
+				currentNewPart = null;
+				currentHitPart = null;
+				placingPart = false;
+			} 
+			else
+			{
+				if (Input.GetKey (KeyCode.Q))
+				{
+					currentNewPart.transform.RotateAround (currentNewPart.transform.position, currentNewPart.transform.forward, -rotationSpeed * Time.deltaTime);
+				} 
+				else if (Input.GetKey (KeyCode.E))
+				{
+					currentNewPart.transform.RotateAround (currentNewPart.transform.position, currentNewPart.transform.forward, rotationSpeed * Time.deltaTime);
+				}
+			}
+		}
+
 		if (Input.GetMouseButtonDown (0) && !PlayerController.instance.gameStarted)
 		{
-			if (placingPart)
+			if (!placingPart)
 			{
 				RaycastHit hit;
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -27,17 +52,15 @@ public class PartAttachment : MonoBehaviour {
 				{
 					Debug.DrawLine (transform.position, hit.point, Color.red, 3.0f);
 
-					AttachablePart hitPart = hit.collider.transform.parent.GetComponent<AttachablePart> ();
+					currentHitPart = hit.collider.transform.parent.GetComponent<AttachablePart> ();
 
-					if (hitPart != null)
+					if (currentHitPart != null)
 					{
 						placingPart = true;
 
-						AttachablePart newPart = GameObject.Instantiate<AttachablePart> (part);
-						newPart.transform.position = hit.point;
-						newPart.transform.forward = hit.normal;
-
-						newPart.SetupJoint (hitPart);
+						currentNewPart 		= GameObject.Instantiate<AttachablePart> (part);
+						currentNewPart.transform.position 	= hit.point;
+						currentNewPart.transform.forward 	= hit.normal;
 					}
 				} 
 				else
@@ -47,7 +70,11 @@ public class PartAttachment : MonoBehaviour {
 			} 
 			else if (placingPart)
 			{
-				placingPart=false;
+				currentNewPart.SetupJoint (currentHitPart);
+
+				currentNewPart 	= null;
+				currentHitPart 	= null;
+				placingPart 	= false;
 			}
 		}
 
