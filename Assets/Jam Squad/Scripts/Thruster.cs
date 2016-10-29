@@ -7,16 +7,15 @@ public class Thruster : AttachablePart
     private KeyCode keyToActivate;
 
 	// Use this for initialization
-	public override void Initalize(KeyCode _keyToActivate)
+	public override void Initialize(KeyCode _keyToActivate)
     {
         keyToActivate = _keyToActivate;
-		selfRigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	public override void  ActivatePart ()
     {
-		selfRigidbody.AddForce(transform.forward * thrustSpeed);
+		selfRigidbody.AddForce(-transform.forward * thrustSpeed);
 	}
 
 	public override void DeactivatePart()

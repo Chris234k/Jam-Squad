@@ -24,7 +24,7 @@ public class PartAttachment : MonoBehaviour {
 		{
 			if (PlayerController.instance.gameStarted)
 			{
-				Destroy (currentNewPart);
+				Destroy (currentNewPart.gameObject);
 				currentNewPart = null;
 				currentHitPart = null;
 				placingPart = false;

@@ -23,6 +23,14 @@ public class AttachablePart : MonoBehaviour{
 		selfCollider 	= GetComponent<Collider> ();
 
 		selfRigidbody.useGravity = false;
+		selfRigidbody.isKinematic = true;
+
+		PlayerController.OnControlEnabled += HandleOnControlEnabled;
+	}
+
+	void HandleOnControlEnabled ()
+	{
+		selfRigidbody.isKinematic = false;
 	}
 
 	public void SetupJoint(AttachablePart argConnectedPart)
@@ -33,7 +41,6 @@ public class AttachablePart : MonoBehaviour{
 		fixedJoint.enableCollision 	= false;
         PlayerController.instance.AttachPart(this);
 		OnJointBreak += HandleOnJointBreak;
-
 	}
 
 	void HandleOnJointBreak (AttachablePart argBrokenPart)
@@ -45,7 +52,7 @@ public class AttachablePart : MonoBehaviour{
 		}
 	}
 
-	public virtual void Initalize(KeyCode keyToActivate)
+	public virtual void Initialize(KeyCode keyToActivate)
 	{
 
 	}

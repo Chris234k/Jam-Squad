@@ -41,6 +41,11 @@ public abstract class Spawner : MonoBehaviour
 		didSpawn (spawnable);
 	}
 
+	void OnDrawGizmos()
+	{
+		Gizmos.DrawSphere (this.transform.position, 1.0f);
+	}
+
 	protected abstract void willSpawn (SpawnableBehavior spawnable);
 	protected abstract void didSpawn (SpawnableBehavior spawnable);
 }
