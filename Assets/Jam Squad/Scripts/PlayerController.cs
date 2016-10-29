@@ -80,11 +80,33 @@ public class PlayerController : MonoBehaviour
 			if (attachedParts [i].interactive)
 			{
 				KeyCode keyToUse = GenerateRandomKeyCode ();
-				activeParts.Add (new Part (keyToUse, attachedParts [i]));
+                AttachablePart part = attachedParts[i];
+
+                activeParts.Add (new Part (keyToUse, part));
 				GameObject keyMarker = Instantiate (keyMarkerCanvas, attachedParts [i].transform.position, Quaternion.identity) as GameObject;
 				keyMarker.transform.SetParent (attachedParts [i].gameObject.transform);
 				keyMarker.transform.localPosition = new Vector3 (0f, 0f, 2.0f);
-				keyMarker.GetComponent<KeyMarker> ().markerText.text = keyToUse.ToString ();
+                KeyMarker keyMark = keyMarker.GetComponent<KeyMarker>();
+                keyMark.markerText.text = keyToUse.ToString();
+
+                if(part is Thruster)
+                {
+                    Thruster thruster = (Thruster)part;
+
+                    // Lateral thrusters will have x or y thrust
+                    if(thruster.thrustAxis.x != 0 || thruster.thrustAxis.y != 0)
+                    {
+                        keyMark.markerText.color = Color.yellow;
+                    }
+                    else
+                    {
+                        keyMark.markerText.color = Color.green;
+                    }
+                }
+                else if (part is TurretScript)
+                {
+                    keyMark.markerText.color = Color.red;
+                }
 			}
         }
     }
