@@ -9,8 +9,8 @@ public class AttachablePart : MonoBehaviour
 
     public static event Action<AttachablePart> OnJointBreak;
 
-	[SerializeField]
-	private bool unbreakable = false;
+    [SerializeField]
+    private bool unbreakable = false;
 
     [HideInInspector]
     public Rigidbody selfRigidbody;
@@ -68,25 +68,20 @@ public class AttachablePart : MonoBehaviour
             //TODO Need to find appropriate factors to justify breakage
             if (!unbreakable && collision.relativeVelocity.magnitude >= COLLISION_BREAK_VELOCITY)
             {
-				FireJointBreak ();
+                FireJointBreak();
             }
         }
     }
 
-	void FireJointBreak()
-	{
-		OnJointBreak -= HandleOnJointBreak;
-		Destroy(fixedJoint);
-
-		if (OnJointBreak != null)
-		{
-			OnJointBreak(this);
-		}
-	}
-
-    public virtual void Initialize(KeyCode keyToActivate)
+    void FireJointBreak()
     {
+        OnJointBreak -= HandleOnJointBreak;
+        Destroy(fixedJoint);
 
+        if (OnJointBreak != null)
+        {
+            OnJointBreak(this);
+        }
     }
 
     public virtual void ActivatePart()
