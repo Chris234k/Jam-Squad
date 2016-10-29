@@ -17,6 +17,9 @@ public class LazerWallObstacle : Obstacle
         nodeA.transform.position = GetPointInSphere(spawnRadius, transform.position);
         nodeB.transform.position = GetPointInSphere(spawnRadius, transform.position);
 
+		nodeA.transform.forward = nodeB.transform.position - nodeA.transform.position;
+		nodeB.transform.forward = nodeA.transform.position - nodeB.transform.position;
+
         // Prevent trail from drawing while adjusting to the spawn pos
         lazer.enabled = false;
         lazer.transform.position = nodeA.transform.position;
