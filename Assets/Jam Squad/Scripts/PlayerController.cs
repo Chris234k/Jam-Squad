@@ -77,8 +77,9 @@ public class PlayerController : MonoBehaviour
         {
             KeyCode keyToUse = GenerateRandomKeyCode();
             activeParts.Add(new Part(keyToUse, attachedParts[i]));
-            GameObject keyMarker = Instantiate(keyMarkerCanvas, attachedParts[i].transform.position + new Vector3(0,0.35f,0), Quaternion.identity) as GameObject;
+            GameObject keyMarker = Instantiate(keyMarkerCanvas, attachedParts[i].transform.position, Quaternion.identity) as GameObject;
             keyMarker.transform.SetParent(attachedParts[i].gameObject.transform);
+			keyMarker.transform.localPosition = new Vector3 (0f, 0f, 2.0f);
             keyMarker.GetComponent<KeyMarker>().markerText.text = keyToUse.ToString();
             Debug.Log(activeParts[i].keyToActivate);
         }
