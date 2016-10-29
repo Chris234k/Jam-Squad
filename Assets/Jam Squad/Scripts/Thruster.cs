@@ -7,20 +7,44 @@ public class Thruster : AttachablePart
 
 	public Vector3 thrustAxis;
 
+	public ParticleSystem ps;
+
+	ParticleSystem.EmissionModule em;
+
+	private bool activated;
+
+	void Start()
+	{
+		em = ps.emission;
+		em.enabled = false;
+	}
+
     // Update is called once per frame
     public override void  ActivatePart()
     {
-        selfRigidbody.AddRelativeForce(thrustAxis.normalized * thrustSpeed);
+		activated = true;
+		ParticleSystem.EmissionModule em = ps.emission;
+		em.enabled = true;
     }
 
     public override void DeactivatePart()
     {
-
+		activated = false;
+		ParticleSystem.EmissionModule em = ps.emission;
+		em.enabled = false;
     }
 
 	void OnDrawGizmos()
 	{
 //		Gizmos.color = Color.magenta;
 //		Gizmos.DrawRay (transform.position, -thrustAxis.normalized);
+	}
+
+	void Update()
+	{
+		if (activated)
+		{
+			selfRigidbody.AddRelativeForce (thrustAxis.normalized * thrustSpeed);
+		}
 	}
 }
