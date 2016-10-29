@@ -26,11 +26,13 @@ public class TurretScript : AttachablePart
     GameObject load;
     BulletScript loadedBullet;
 
-    void Start()
-    {
-        self = GetComponent<Renderer>();
-        bullets = new GameObjectPool(15, bullet, bulletParent);
-    }
+	public override void Initialize(bool isCursor)
+	{
+		base.Initialize (isCursor);
+		
+		self = GetComponent<Renderer>();
+		bullets = new GameObjectPool(15, bullet, bulletParent);
+	}
 
     void OnTriggerEnter(Collider col)
     {
