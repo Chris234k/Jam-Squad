@@ -27,14 +27,22 @@ public class AttachablePart : MonoBehaviour
 
     void Start()
     {
-        selfRigidbody = GetComponent<Rigidbody>();
-        selfCollider = GetComponent<Collider>();
-
-        selfRigidbody.useGravity = false;
-        selfRigidbody.isKinematic = true;
-
-        PlayerController.OnControlEnabled += HandleOnControlEnabled;
+        
     }
+
+	public virtual void Initialize(bool isCursor)
+	{
+		selfRigidbody = GetComponent<Rigidbody>();
+		selfCollider = GetComponent<Collider>();
+
+		selfRigidbody.useGravity = false;
+		selfRigidbody.isKinematic = true;
+
+		if (!isCursor)
+		{
+			PlayerController.OnControlEnabled += HandleOnControlEnabled;
+		}
+	}
 
 	void Destroy()
 	{

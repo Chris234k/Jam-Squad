@@ -96,6 +96,8 @@ public class PartAttachment : MonoBehaviour {
 					newPart.transform.position = cursor.transform.position;
 					newPart.transform.rotation = cursor.transform.rotation;
 
+					newPart.Initialize (false);
+
 					newPart.SetupJoint (currentHitPart);
 
 					currentHitPart 	= null;
@@ -172,6 +174,8 @@ public class PartAttachment : MonoBehaviour {
 		currentPartIndex = partIndex;
 
 		cursor = GameObject.Instantiate<AttachablePart> (partPrefabs [currentPartIndex]);
+
+		cursor.Initialize (true);
 
 		List<Renderer> renderers = cursor.GetRenderers ();
 
