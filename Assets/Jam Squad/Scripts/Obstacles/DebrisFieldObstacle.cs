@@ -14,7 +14,7 @@ public class DebrisFieldObstacle : Obstacle
     public Vector3 maxScale;
 
     // Use this for initialization
-    void Start()
+    public override void WasSpawned(Spawner spawner)
     {
         debrisList = new List<DebrisObstacle>();
 
@@ -23,7 +23,7 @@ public class DebrisFieldObstacle : Obstacle
         {
             DebrisObstacle debris = (Instantiate<GameObject>(debrisObstaclePrefab).GetComponent<DebrisObstacle>());
 
-            debris.transform.position = transform.position + Random.insideUnitSphere * spawnRadius;
+            debris.transform.position = GetPointInSphere(spawnRadius, transform.position);
             debris.transform.SetParent(transform);
 
             Vector3 randomScale;
