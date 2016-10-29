@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour {
 
-	[System.Serializable]
+	[SerializeField]
 	private Transform spawnPoint;
 
-	[System.Serializable]
+	[SerializeField]
 	private float spawnInterval;
 
-	[System.Serializable]
+	[SerializeField]
 	private List<SpawnableBehavior> spawnables;
 
 	// Use this for initialization
@@ -20,5 +20,6 @@ public class Spawner : MonoBehaviour {
 
 	IEnumerator spawnRoutine() {
 
+		return null;
 	}
 }
