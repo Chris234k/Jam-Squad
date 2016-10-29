@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
         public KeyCode keyToActivate;
         public AttachablePart attachedPart;
 
-		public Part(KeyCode _key, AttachablePart _partToAdd)
+        public Part(KeyCode _key, AttachablePart _partToAdd)
         {
             keyToActivate = _key;
             attachedPart = _partToAdd;
@@ -19,26 +19,28 @@ public class PlayerController : MonoBehaviour
 
     List<Part> activeParts;
 
-	private List<AttachablePart> attachedParts = new List<AttachablePart>();
+    private List<AttachablePart> attachedParts = new List<AttachablePart>();
     public bool gameStarted = false;
 
     public static PlayerController instance;
     public GameObject keyMarkerCanvas;
-	public static event Action OnControlEnabled;
 
-	// Use this for initialization
+    public static event Action OnControlEnabled;
+
+    // Use this for initialization
     void Awake()
     {
         instance = this;
     }
-	void Start ()
+
+    void Start()
     {
         
         activeParts = new List<Part>();
-	}
+    }
 	
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
         if (gameStarted == true)
         {
@@ -57,9 +59,9 @@ public class PlayerController : MonoBehaviour
                 StartGame();
             }
         }
-	}
+    }
 
-	public void AttachPart(AttachablePart partToAttach)
+    public void AttachPart(AttachablePart partToAttach)
     {
         attachedParts.Add(partToAttach);
     }
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         gameStarted = true;
         GenerateKeysToParts();
-		FireOnControlEnabled ();
+        FireOnControlEnabled();
     }
 
     void GenerateKeysToParts()
@@ -77,10 +79,9 @@ public class PlayerController : MonoBehaviour
         {
             KeyCode keyToUse = GenerateRandomKeyCode();
             activeParts.Add(new Part(keyToUse, attachedParts[i]));
-            GameObject keyMarker = Instantiate(keyMarkerCanvas, attachedParts[i].transform.position + new Vector3(0,0.35f,0), Quaternion.identity) as GameObject;
+            GameObject keyMarker = Instantiate(keyMarkerCanvas, attachedParts[i].transform.position + new Vector3(0, 0.35f, 0), Quaternion.identity) as GameObject;
             keyMarker.transform.SetParent(attachedParts[i].gameObject.transform);
             keyMarker.GetComponent<KeyMarker>().markerText.text = keyToUse.ToString();
-            Debug.Log(activeParts[i].keyToActivate);
         }
     }
 
@@ -109,13 +110,13 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-	void FireOnControlEnabled()
-	{
-		if (OnControlEnabled != null)
-		{
-			OnControlEnabled ();
-		}
-	}
+    void FireOnControlEnabled()
+    {
+        if (OnControlEnabled != null)
+        {
+            OnControlEnabled();
+        }
+    }
 }
 
 public enum KeyboardEnum
