@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Spawner : MonoBehaviour {
-
+public abstract class Spawner : MonoBehaviour 
+{
 	[SerializeField]
 	private Transform spawnPoint;
 
@@ -11,42 +11,36 @@ public class Spawner : MonoBehaviour {
 	private float spawnRadius;
 
 	[SerializeField]
-	private float spawnInterval;
-
-	[SerializeField]
 	private List<SpawnableBehavior> spawnables;
 
 	// Use this for initialization
-	void Start () {
-		if (this.spawnPoint == null) {
+	protected virtual void Start () 
+	{
+		if (this.spawnPoint == null) 
+		{
 			this.spawnPoint = this.transform;
 		}
-		spawn ();
 	}
-
-	IEnumerator spawnRoutine() {
-
-		return null;
-	}
-
-	protected void spawn() {
-		if (spawnables.Count == 0) {
+		
+	protected void spawn() 
+	{
+		if (spawnables.Count == 0) 
+		{
 			Debug.LogError ("No Spawnables in " + this.name);
 		}
 
 		int roll = Random.Range (0, spawnables.Count);
 		GameObject obj = GameObject.Instantiate (spawnables [roll].gameObject);
 		SpawnableBehavior spawnable = obj.GetComponent<SpawnableBehavior> ();
+
+		willSpawn (spawnable);
 		float distFromSpawnPoint = Random.Range (0, spawnRadius);
-		float angle = Random.Range (0, 360);
-		float x = Mathf.Cos (angle) * distFromSpawnPoint;
-		float z = Mathf.Sin (angle) * distFromSpawnPoint;
-		Vector3 position = new Vector3 (x, spawnPoint.transform.position.y, z);
+		Vector3 position = Random.insideUnitSphere*distFromSpawnPoint + this.spawnPoint.position;
 		spawnable.Position = position;
-		spawnable.Destroyed += onSpawnableDestroyed;
+		spawnable.WasSpawned (this);
+		didSpawn (spawnable);
 	}
 
-	private void onSpawnableDestroyed(SpawnableBehavior spawnable) {
-		spawn ();
-	}
+	protected abstract void willSpawn (SpawnableBehavior spawnable);
+	protected abstract void didSpawn (SpawnableBehavior spawnable);
 }

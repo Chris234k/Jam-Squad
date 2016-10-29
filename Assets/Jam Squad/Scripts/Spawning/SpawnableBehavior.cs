@@ -19,4 +19,6 @@ public abstract class SpawnableBehavior : MonoBehaviour
 			this.Destroyed (this);
 		}
 	}
+
+	public abstract void WasSpawned(Spawner spawner);
 }
