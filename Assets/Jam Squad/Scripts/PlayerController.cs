@@ -147,14 +147,6 @@ public enum KeyboardEnum
     //     Space key.
     //     ///
     Space = 32,
-
-    Asterisk = 42,
-    //
-    // Summary:
-    //     ///
-    //     Plus key '+'.
-    //     ///
-    Plus = 43,
     //
     // Summary:
     //     ///
@@ -239,19 +231,11 @@ public enum KeyboardEnum
     //     The '9' key on the top of the alphanumeric keyboard.
     //     ///
     Alpha9 = 57,
-    //
-    // Summary:
-    //     ///
-    //     Semicolon ';' key.
-    //     ///
-
-    Less = 60,
-    //
     // Summary:
     //     ///
     //     Equals '=' key.
     //     ///
-    //
+    Equals = 61,
     // Summary:
     //     ///
     //     Left square bracket key '['.
