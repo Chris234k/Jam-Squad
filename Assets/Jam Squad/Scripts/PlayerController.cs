@@ -77,12 +77,15 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < attachedParts.Count; i++)
         {
-            KeyCode keyToUse = GenerateRandomKeyCode();
-            activeParts.Add(new Part(keyToUse, attachedParts[i]));
-            GameObject keyMarker = Instantiate(keyMarkerCanvas, attachedParts[i].transform.position, Quaternion.identity) as GameObject;
-            keyMarker.transform.SetParent(attachedParts[i].gameObject.transform);
-			keyMarker.transform.localPosition = new Vector3 (0f, 0f, 2.0f);
-            keyMarker.GetComponent<KeyMarker>().markerText.text = keyToUse.ToString();
+			if (attachedParts [i].interactive)
+			{
+				KeyCode keyToUse = GenerateRandomKeyCode ();
+				activeParts.Add (new Part (keyToUse, attachedParts [i]));
+				GameObject keyMarker = Instantiate (keyMarkerCanvas, attachedParts [i].transform.position, Quaternion.identity) as GameObject;
+				keyMarker.transform.SetParent (attachedParts [i].gameObject.transform);
+				keyMarker.transform.localPosition = new Vector3 (0f, 0f, 2.0f);
+				keyMarker.GetComponent<KeyMarker> ().markerText.text = keyToUse.ToString ();
+			}
         }
     }
 

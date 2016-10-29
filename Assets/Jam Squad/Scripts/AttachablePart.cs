@@ -13,6 +13,8 @@ public class AttachablePart : MonoBehaviour
     [SerializeField]
     protected bool unbreakable = false;
 
+	public bool interactive = true;
+
     [HideInInspector]
     public Rigidbody selfRigidbody;
 
