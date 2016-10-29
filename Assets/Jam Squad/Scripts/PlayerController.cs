@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     List<Part> activeParts;
 
 	private List<AttachablePart> attachedParts = new List<AttachablePart>();
-    bool gameStarted = false;
+    public bool gameStarted = false;
 
     public static PlayerController instance;
 
@@ -231,45 +231,15 @@ public enum KeyboardEnum
     //
     // Summary:
     //     ///
-    //     Colon ':' key.
-    //     ///
-    Colon = 58,
-    //
-    // Summary:
-    //     ///
     //     Semicolon ';' key.
     //     ///
-    Semicolon = 59,
-    //
-    // Summary:
-    //     ///
-    //     Less than '<' key.
-    //     ///
+
     Less = 60,
     //
     // Summary:
     //     ///
     //     Equals '=' key.
     //     ///
-    Equals = 61,
-    //
-    // Summary:
-    //     ///
-    //     Greater than '>' key.
-    //     ///
-    Greater = 62,
-    //
-    // Summary:
-    //     ///
-    //     Question mark '?' key.
-    //     ///
-    Question = 63,
-    //
-    // Summary:
-    //     ///
-    //     At key '@'.
-    //     ///
-    At = 64,
     //
     // Summary:
     //     ///
@@ -288,18 +258,6 @@ public enum KeyboardEnum
     //     Right square bracket key ']'.
     //     ///
     RightBracket = 93,
-    //
-    // Summary:
-    //     ///
-    //     Caret key '^'.
-    //     ///
-    Caret = 94,
-    //
-    // Summary:
-    //     ///
-    //     Underscore '_' key.
-    //     ///
-    Underscore = 95,
     //
     // Summary:
     //     ///
