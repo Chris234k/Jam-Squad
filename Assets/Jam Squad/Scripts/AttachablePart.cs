@@ -22,6 +22,7 @@ public class AttachablePart : MonoBehaviour{
 		selfRigidbody 	= GetComponent<Rigidbody> ();
 		selfCollider 	= GetComponent<Collider> ();
 
+		selfRigidbody.useGravity = false;
 	}
 
 	public void SetupJoint(AttachablePart argConnectedPart)
