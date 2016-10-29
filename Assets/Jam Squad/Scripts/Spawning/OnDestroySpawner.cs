@@ -17,6 +17,8 @@ public class OnDestroySpawner : Spawner
 
 	protected override void didSpawn (SpawnableBehavior spawnable)
 	{
+		// Remove if already listening, to prevent duplicates
+		spawnable.Destroyed -= onSpawnableDestroyed;
 		spawnable.Destroyed += onSpawnableDestroyed;
 	}
 	#endregion

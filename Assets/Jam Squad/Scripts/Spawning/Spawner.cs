@@ -35,10 +35,7 @@ public abstract class Spawner : MonoBehaviour
 
 		willSpawn (spawnable);
 		float distFromSpawnPoint = Random.Range (0, spawnRadius);
-		float angle = Random.Range (0, 360);
-		float x = Mathf.Cos (angle) * distFromSpawnPoint;
-		float z = Mathf.Sin (angle) * distFromSpawnPoint;
-		Vector3 position = new Vector3 (x, 0, z) + this.spawnPoint.position;
+		Vector3 position = Random.insideUnitSphere*distFromSpawnPoint + this.spawnPoint.position;
 		spawnable.Position = position;
 		spawnable.WasSpawned (this);
 		didSpawn (spawnable);
