@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public bool gameStarted = false;
 
     public static PlayerController instance;
-
+    public GameObject keyMarkerCanvas;
 	public static event Action OnControlEnabled;
 
 	// Use this for initialization
@@ -75,7 +75,11 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < attachedParts.Count; i++)
         {
-            activeParts.Add(new Part(GenerateRandomKeyCode(), attachedParts[i]));
+            KeyCode keyToUse = GenerateRandomKeyCode();
+            activeParts.Add(new Part(keyToUse, attachedParts[i]));
+            GameObject keyMarker = Instantiate(keyMarkerCanvas, attachedParts[i].transform.position + new Vector3(0,0.35f,0), Quaternion.identity) as GameObject;
+            keyMarker.transform.SetParent(attachedParts[i].gameObject.transform);
+            keyMarker.GetComponent<KeyMarker>().markerText.text = keyToUse.ToString();
             Debug.Log(activeParts[i].keyToActivate);
         }
     }
