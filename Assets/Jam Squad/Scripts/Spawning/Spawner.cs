@@ -52,7 +52,7 @@ public abstract class Spawner : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(this.transform.position, 1.0f);
+        Gizmos.DrawSphere(this.transform.position, 0.25f);
     }
 
     protected abstract void willSpawn(SpawnableBehavior spawnable);
