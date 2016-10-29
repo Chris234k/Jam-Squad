@@ -14,10 +14,9 @@ public class TestSpawnable : SpawnableBehavior {
 
 	#region implemented abstract members of SpawnableBehavior
 
-	public override Vector3 Position {
-		set {
-			this.transform.position = value;
-		}
+	public override void WasSpawned (Spawner spawner)
+	{
+		
 	}
 
 	#endregion
