@@ -668,24 +668,6 @@ public enum KeyboardEnum
     //
     // Summary:
     //     ///
-    //     F13 function key.
-    //     ///
-    F13 = 294,
-    //
-    // Summary:
-    //     ///
-    //     F14 function key.
-    //     ///
-    F14 = 295,
-    //
-    // Summary:
-    //     ///
-    //     F15 function key.
-    //     ///
-    F15 = 296,
-    //
-    // Summary:
-    //     ///
     //     Numlock key.
     //     ///
     Numlock = 300,
