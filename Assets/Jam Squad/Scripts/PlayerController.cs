@@ -46,10 +46,16 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < activeParts.Count; i++)
             {
-                if (Input.GetKey(activeParts[i].keyToActivate))
+                if (Input.GetKeyDown(activeParts[i].keyToActivate))
                 {
+					Debug.Log ("Set Active: " + activeParts [i].keyToActivate);
                     activeParts[i].attachedPart.ActivatePart();
                 }
+				else if (Input.GetKeyUp(activeParts[i].keyToActivate))
+				{
+					Debug.Log ("Set Inactive: " + activeParts [i].keyToActivate);
+					activeParts[i].attachedPart.DeactivatePart();
+				}
             }
         }
         else
