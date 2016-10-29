@@ -13,6 +13,15 @@ public class Obstacle : SpawnableBehavior
         }
     }
 
+    #region implemented abstract members of SpawnableBehavior
+
+    public override void WasSpawned(Spawner spawner)
+    {
+        
+    }
+
+    #endregion
+
     protected void SpinUpdate()
     {
         transform.eulerAngles += spinRate * Time.deltaTime;
