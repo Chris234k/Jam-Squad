@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     class Part
     {
         public KeyCode keyToActivate;
-        public IAttachablePart attachedPart;
+        public AttachablePart attachedPart;
 
-        public Part(KeyCode _key, IAttachablePart _partToAdd)
+		public Part(KeyCode _key, AttachablePart _partToAdd)
         {
             keyToActivate = _key;
             attachedPart = _partToAdd;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     List<Part> activeParts;
 
-    private List<IAttachablePart> attachedParts;
+	private List<AttachablePart> attachedParts;
     bool gameStarted = false;
 	// Use this for initialization
 	void Start ()
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
-    public void AttachPart(IAttachablePart partToAttach)
+	public void AttachPart(AttachablePart partToAttach)
     {
         attachedParts.Add(partToAttach);
     }

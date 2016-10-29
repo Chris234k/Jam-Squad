@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(Rigidbody))]
-public class Thruster : MonoBehaviour,IAttachablePart
+public class Thruster : AttachablePart
 {
     private float thrustSpeed= 50f;
     private KeyCode keyToActivate;
-    private Rigidbody selfRigidBody;
 
 	// Use this for initialization
-	public void Initalize(KeyCode _keyToActivate)
+	public override void Initalize(KeyCode _keyToActivate)
     {
         keyToActivate = _keyToActivate;
-        selfRigidBody = GetComponent<Rigidbody>();
+		selfRigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
-	public void ActivatePart ()
+	public override void  ActivatePart ()
     {
-        selfRigidBody.AddForce(transform.forward * thrustSpeed);
+		selfRigidbody.AddForce(transform.forward * thrustSpeed);
 	}
-    public void DeactivatePart()
+	public override void DeactivatePart()
     {
 
     }

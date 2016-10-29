@@ -2,23 +2,37 @@
 using System;
 using System.Collections;
 
+[RequireComponent (typeof(Rigidbody))]
 public class AttachablePart : MonoBehaviour{
 
 	public static event Action<AttachablePart> OnJointBreak;
 
-	public Rigidbody rigidbody;
+	[HideInInspector]
+	public Rigidbody selfRigidbody;
+
+	[HideInInspector]
+	public Collider selfCollider;
 
 	private FixedJoint fixedJoint;
 
 	private AttachablePart connectedPart;
 
-	public void Initialize(AttachablePart argConnectedPart)
+	void Start()
+	{
+		selfRigidbody 	= GetComponent<Rigidbody> ();
+		selfCollider 	= GetComponent<Collider> ();
+
+	}
+
+	public void SetupJoint(AttachablePart argConnectedPart)
 	{
 		connectedPart 				= argConnectedPart;
 		fixedJoint 					= this.gameObject.AddComponent<FixedJoint> ();
-		fixedJoint.connectedBody 	= connectedPart.rigidbody;
+		fixedJoint.connectedBody 	= connectedPart.GetComponent<Rigidbody>();
+		fixedJoint.enableCollision 	= false;
 
 		OnJointBreak += HandleOnJointBreak;
+
 	}
 
 	void HandleOnJointBreak (AttachablePart argBrokenPart)
@@ -29,9 +43,19 @@ public class AttachablePart : MonoBehaviour{
 			Destroy (fixedJoint);
 		}
 	}
-	
-	// Update is called once per frame
-	//	void Update () {
-	//		
-	//	}
+
+	public virtual void Initalize(KeyCode keyToActivate)
+	{
+
+	}
+
+	public virtual void ActivatePart()
+	{
+
+	}
+
+	public virtual void DeactivatePart()
+	{
+
+	}
 }
