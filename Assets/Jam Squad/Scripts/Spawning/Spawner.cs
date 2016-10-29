@@ -2,50 +2,60 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class Spawner : MonoBehaviour 
+public abstract class Spawner : MonoBehaviour
 {
-	[SerializeField]
-	private Transform spawnPoint;
+    [SerializeField]
+    private Transform spawnPoint;
 
-	[SerializeField]
-	private float spawnRadius;
+    [SerializeField]
+    private float spawnRadius;
 
-	[SerializeField]
-	private List<SpawnableBehavior> spawnables;
+    [SerializeField]
+    private List<SpawnableBehavior> spawnables;
 
-	// Use this for initialization
-	protected virtual void Start () 
-	{
-		if (this.spawnPoint == null) 
-		{
-			this.spawnPoint = this.transform;
-		}
-	}
-		
-	protected void spawn() 
-	{
-		if (spawnables.Count == 0) 
-		{
-			Debug.LogError ("No Spawnables in " + this.name);
-		}
+    protected virtual void OnPlayerControlEnabled()
+    {
+        if (this.spawnPoint == null)
+        {
+            this.spawnPoint = this.transform;
+        }
+    }
 
-		int roll = Random.Range (0, spawnables.Count);
-		GameObject obj = GameObject.Instantiate (spawnables [roll].gameObject);
-		SpawnableBehavior spawnable = obj.GetComponent<SpawnableBehavior> ();
+    protected virtual void OnEnable()
+    {
+        PlayerController.OnControlEnabled += OnPlayerControlEnabled;
+    }
 
-		willSpawn (spawnable);
-		float distFromSpawnPoint = Random.Range (0, spawnRadius);
-		Vector3 position = Random.insideUnitSphere*distFromSpawnPoint + this.spawnPoint.position;
-		spawnable.Position = position;
-		spawnable.WasSpawned (this);
-		didSpawn (spawnable);
-	}
+    protected virtual void OnDisable()
+    {
+        PlayerController.OnControlEnabled -= OnPlayerControlEnabled;
+    }
 
-	void OnDrawGizmos()
-	{
-		Gizmos.DrawSphere (this.transform.position, 1.0f);
-	}
+    protected void spawn()
+    {
+        if (spawnables.Count == 0)
+        {
+            Debug.LogError("No Spawnables in " + this.name);
+        }
 
-	protected abstract void willSpawn (SpawnableBehavior spawnable);
-	protected abstract void didSpawn (SpawnableBehavior spawnable);
+        int roll = Random.Range(0, spawnables.Count);
+        GameObject obj = GameObject.Instantiate(spawnables[roll].gameObject);
+        SpawnableBehavior spawnable = obj.GetComponent<SpawnableBehavior>();
+
+        willSpawn(spawnable);
+        float distFromSpawnPoint = Random.Range(0, spawnRadius);
+        Vector3 position = Random.insideUnitSphere * distFromSpawnPoint + this.spawnPoint.position;
+        spawnable.Position = position;
+        spawnable.WasSpawned(this);
+        didSpawn(spawnable);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(this.transform.position, 1.0f);
+    }
+
+    protected abstract void willSpawn(SpawnableBehavior spawnable);
+
+    protected abstract void didSpawn(SpawnableBehavior spawnable);
 }
