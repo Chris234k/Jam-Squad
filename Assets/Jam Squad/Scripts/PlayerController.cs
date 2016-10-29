@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
+	public static event Action OnControlEnabled;
+
 	// Use this for initialization
     void Awake()
     {
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         gameStarted = true;
         GenerateKeysToParts();
+		FireOnControlEnabled ();
     }
 
     void GenerateKeysToParts()
@@ -101,6 +104,14 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
+	void FireOnControlEnabled()
+	{
+		if (OnControlEnabled != null)
+		{
+			OnControlEnabled ();
+		}
+	}
 }
 
 public enum KeyboardEnum
