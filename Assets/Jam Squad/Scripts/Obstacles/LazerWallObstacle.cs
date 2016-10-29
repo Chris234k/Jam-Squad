@@ -7,6 +7,8 @@ public class LazerWallObstacle : Obstacle
     public GameObject nodeB;
     public TrailRenderer lazer;
 
+    Rigidbody lazerRigidbody;
+
     public float spawnRadius;
     float coolDown;
 
@@ -19,6 +21,7 @@ public class LazerWallObstacle : Obstacle
         lazer.enabled = false;
         lazer.transform.position = nodeA.transform.position;
         lazer.enabled = true;
+        lazerRigidbody = lazer.GetComponent<Rigidbody>();
 
         coolDown = Random.Range(1f, 3f);
         InvokeRepeating("Lazer", coolDown, coolDown);
@@ -36,8 +39,18 @@ public class LazerWallObstacle : Obstacle
     void Lazer()
     {
         lazer.transform.position = nodeA.transform.position;
-        LeanTween.move(lazer.gameObject, nodeB.transform.position, 0.2f).setEase(LeanTweenType.easeInCubic);
+        LeanTween.move(lazer.gameObject, nodeB.transform.position, 0.2f)
+            .setEase(LeanTweenType.easeInCubic)
+            .setOnComplete(StopLazerVelocity);
     }
+
+    void StopLazerVelocity()
+    {
+        // To ensure the lazer stops at the end point (could have velocity from collisions)
+        lazerRigidbody.velocity = Vector3.zero;
+        lazerRigidbody.angularVelocity = Vector3.zero;
+    }
+
 
     void OnDrawGizmos()
     {

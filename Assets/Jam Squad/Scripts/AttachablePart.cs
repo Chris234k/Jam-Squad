@@ -17,7 +17,7 @@ public class AttachablePart : MonoBehaviour{
 
 	private AttachablePart connectedPart;
 
-    const float COLLISION_BREAK_VELOCITY = 10f;
+    const float COLLISION_BREAK_VELOCITY = 1f;
 
 	void Start()
 	{
@@ -59,6 +59,7 @@ public class AttachablePart : MonoBehaviour{
         // Collides with ObstacleWall
         if(collision.gameObject.layer == 9)
         {
+            Debug.Log("COLLISION VEL: " + collision.relativeVelocity.magnitude);
             //TODO Left off here, need to find appropriate factors to justify breakage
             if(collision.relativeVelocity.magnitude >= COLLISION_BREAK_VELOCITY)
             {
