@@ -9,7 +9,7 @@ public class Obstacle : SpawnableBehavior
     {
         set
         {
-            throw new System.NotImplementedException();
+            transform.position = value;
         }
     }
 
