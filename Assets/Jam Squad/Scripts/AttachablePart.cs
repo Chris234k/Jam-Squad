@@ -79,7 +79,7 @@ public class AttachablePart : MonoBehaviour
         // Collides with ObstacleWall or Enemy
         if (collision.gameObject.layer == 9 || collision.gameObject.layer == 11)
         {
-            Debug.Log("COLLISION VEL: " + collision.relativeVelocity.magnitude);
+            //Debug.Log("COLLISION VEL: " + collision.relativeVelocity.magnitude);
             //TODO Need to find appropriate factors to justify breakage
             if (!unbreakable && collision.relativeVelocity.magnitude >= COLLISION_BREAK_VELOCITY)
             {
