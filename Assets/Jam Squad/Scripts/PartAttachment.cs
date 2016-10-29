@@ -9,9 +9,13 @@ public class PartAttachment : MonoBehaviour {
 	[SerializeField]
 	private float rotationSpeed = 45.0f;
 
+	[SerializeField]
+	private LayerMask layerMask;
+
 	private bool placingPart = false;
 	private AttachablePart currentNewPart;
 	private AttachablePart currentHitPart;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -48,7 +52,7 @@ public class PartAttachment : MonoBehaviour {
 			{
 				RaycastHit hit;
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				if (Physics.Raycast (ray, out hit, 1000f))
+				if (Physics.Raycast (ray, out hit, 1000f, layerMask.value, QueryTriggerInteraction.Ignore))
 				{
 					Debug.DrawLine (transform.position, hit.point, Color.red, 3.0f);
 

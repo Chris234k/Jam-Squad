@@ -74,7 +74,7 @@ public class TurretScript : AttachablePart
                 loadedBullet.target = target.position;
                 loadedBullet.movespeed = bulletSpeed;
                 load.transform.LookAt(target);
-                load.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 500);
+                load.GetComponent<Rigidbody>().AddRelativeForce(0f, 0f, 2000f);
 
             }
         }
