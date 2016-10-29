@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TurretScript : AttachablePart
 {
-    private KeyCode keyToActivate;
     public float turnSpeed;
 
     public float fireRate;
@@ -41,7 +40,6 @@ public class TurretScript : AttachablePart
             isActive = true;
             self.material = activeMat;
             target = col.transform;
-            Debug.Log("FOUND TARGET: " + keyToActivate);
         }
     }
 
@@ -52,7 +50,6 @@ public class TurretScript : AttachablePart
         {
             self.material = defaultMat;
             isActive = false;
-            Debug.Log("LOST TARGET: " + keyToActivate);
         }
     }
 
