@@ -17,6 +17,8 @@ public class AttachablePart : MonoBehaviour{
 
 	private AttachablePart connectedPart;
 
+    const float COLLISION_BREAK_VELOCITY = 10f;
+
 	void Start()
 	{
 		selfRigidbody 	= GetComponent<Rigidbody> ();
@@ -51,6 +53,19 @@ public class AttachablePart : MonoBehaviour{
 			Destroy (fixedJoint);
 		}
 	}
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Collides with ObstacleWall
+        if(collision.gameObject.layer == 9)
+        {
+            //TODO Left off here, need to find appropriate factors to justify breakage
+            if(collision.relativeVelocity.magnitude >= COLLISION_BREAK_VELOCITY)
+            {
+                OnJointBreak(this);
+            }
+        }
+    }
 
 	public virtual void Initialize(KeyCode keyToActivate)
 	{
