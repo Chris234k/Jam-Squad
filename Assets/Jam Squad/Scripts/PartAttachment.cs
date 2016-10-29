@@ -10,6 +10,9 @@ public class PartAttachment : MonoBehaviour {
 	[SerializeField]
 	private LayerMask layerMask;
 
+	[SerializeField]
+	private PartSelectionUI partSelectionUI;
+
 	private bool placingPart = false;
 	private AttachablePart currentHitPart;
 
@@ -26,6 +29,7 @@ public class PartAttachment : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SwitchPart (0);
+		partSelectionUI.HighlightText (0);
 	}
 
 	// Update is called once per frame
@@ -185,5 +189,7 @@ public class PartAttachment : MonoBehaviour {
 		}
 
 		cursor.SetCollidersEnabled (false);
+
+		partSelectionUI.HighlightText (currentPartIndex);
 	}
 }
