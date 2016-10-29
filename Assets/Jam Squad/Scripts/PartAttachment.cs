@@ -65,7 +65,11 @@ public class PartAttachment : MonoBehaviour {
 				{
 					Debug.DrawLine (transform.position, hit.point, Color.red, 3.0f);
 
-					currentHitPart = hit.collider.transform.parent.GetComponent<AttachablePart> ();
+					currentHitPart = hit.collider.GetComponent<AttachablePart> ();
+					if (currentHitPart == null)
+					{
+						currentHitPart = hit.collider.transform.parent.GetComponent<AttachablePart> ();
+					}
 
 					if (currentHitPart != null)
 					{
