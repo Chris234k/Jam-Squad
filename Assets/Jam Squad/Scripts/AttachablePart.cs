@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AttachablePart : MonoBehaviour
@@ -10,7 +11,7 @@ public class AttachablePart : MonoBehaviour
     public static event Action<AttachablePart> OnJointBreak;
 
     [SerializeField]
-    private bool unbreakable = false;
+    protected bool unbreakable = false;
 
     [HideInInspector]
     public Rigidbody selfRigidbody;
@@ -18,9 +19,9 @@ public class AttachablePart : MonoBehaviour
     [HideInInspector]
     public Collider selfCollider;
 
-    private FixedJoint fixedJoint;
+    protected FixedJoint fixedJoint;
 
-    private AttachablePart connectedPart;
+    protected AttachablePart connectedPart;
 
     const float COLLISION_BREAK_VELOCITY = 1f;
 
@@ -35,6 +36,12 @@ public class AttachablePart : MonoBehaviour
         PlayerController.OnControlEnabled += HandleOnControlEnabled;
     }
 
+	void Destroy()
+	{
+		PlayerController.OnControlEnabled -= HandleOnControlEnabled;
+		AttachablePart.OnJointBreak -= HandleOnJointBreak;
+	}
+
     void HandleOnControlEnabled()
     {
         selfRigidbody.isKinematic = false;
@@ -47,14 +54,14 @@ public class AttachablePart : MonoBehaviour
         fixedJoint.connectedBody = connectedPart.GetComponent<Rigidbody>();
         fixedJoint.enableCollision = false;
         PlayerController.instance.AttachPart(this);
-        OnJointBreak += HandleOnJointBreak;
+		AttachablePart.OnJointBreak += HandleOnJointBreak;
     }
 
     void HandleOnJointBreak(AttachablePart argBrokenPart)
     {
         if (argBrokenPart == connectedPart)
         {
-            OnJointBreak -= HandleOnJointBreak;
+			AttachablePart.OnJointBreak -= HandleOnJointBreak;
             Destroy(fixedJoint);
         }
     }
@@ -75,12 +82,12 @@ public class AttachablePart : MonoBehaviour
 
     void FireJointBreak()
     {
-        OnJointBreak -= HandleOnJointBreak;
+		AttachablePart.OnJointBreak -= HandleOnJointBreak;
         Destroy(fixedJoint);
 
-        if (OnJointBreak != null)
+		if (AttachablePart.OnJointBreak != null)
         {
-            OnJointBreak(this);
+			AttachablePart.OnJointBreak(this);
         }
     }
 
@@ -93,4 +100,37 @@ public class AttachablePart : MonoBehaviour
     {
 
     }
+
+	public List<Renderer> GetRenderers()
+	{
+		List<Renderer> toReturn = new List<Renderer>();
+
+		toReturn.AddRange(GetComponentsInChildren<Renderer> ());
+
+		Renderer myRenderer = GetComponent<Renderer> ();
+
+		if (myRenderer != null)
+		{
+			toReturn.Add (myRenderer); 
+		}
+
+		return toReturn;
+	}
+
+	public void SetCollidersEnabled(bool enabled)
+	{
+		Collider[] cols = GetComponents<Collider> ();
+
+		for (int i = 0; i < cols.Length; i++)
+		{
+			cols [i].enabled = enabled;
+		}
+
+		cols = GetComponentsInChildren<Collider> ();
+
+		for (int i = 0; i < cols.Length; i++)
+		{
+			cols [i].enabled = enabled;
+		}
+	}
 }
