@@ -3,9 +3,10 @@ using System.Collections;
 
 public class RingObstacle : Obstacle
 {
-    void Update()
+    public override void WasSpawned(Spawner spawner)
     {
-        SpinUpdate();
+
+        base.WasSpawned(spawner);
     }
 
     public void OnCollisionEnter(Collision col)

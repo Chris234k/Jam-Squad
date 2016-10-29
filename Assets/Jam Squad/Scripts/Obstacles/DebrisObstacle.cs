@@ -9,10 +9,6 @@ public class DebrisObstacle : Obstacle
         float zSpinRate = Random.Range(-20, 20);
 
         spinRate = new Vector3(0, ySpinRate, zSpinRate);
-    }
-
-    void Update()
-    {
-        SpinUpdate();
+        base.WasSpawned(spawner);
     }
 }
