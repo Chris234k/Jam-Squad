@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Thruster : AttachablePart
 {
-    private float thrustSpeed= 10f;
+    public float thrustSpeed= 10f;
     private KeyCode keyToActivate;
 
 	// Use this for initialization
