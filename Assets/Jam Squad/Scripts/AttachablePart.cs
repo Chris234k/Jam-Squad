@@ -46,7 +46,7 @@ public class AttachablePart : MonoBehaviour
 		}
 	}
 
-	void Destroy()
+	void OnDestroy()
 	{
 		PlayerController.OnControlEnabled -= HandleOnControlEnabled;
 		AttachablePart.OnJointBreak -= HandleOnJointBreak;
@@ -54,6 +54,10 @@ public class AttachablePart : MonoBehaviour
 
     void HandleOnControlEnabled()
     {
+        if (selfRigidbody == null)
+        {
+            Debug.Log(gameObject.name);
+        }
         selfRigidbody.isKinematic = false;
     }
 
