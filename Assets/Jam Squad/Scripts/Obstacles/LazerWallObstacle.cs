@@ -39,6 +39,12 @@ public class LazerWallObstacle : Obstacle
         base.WasSpawned(spawner);
     }
 
+    void OnDestroy()
+    {
+        // Stop animation on scene reload
+        LeanTween.cancel(gameObject, false);
+    }
+
     void Lazer()
     {
         lazer.transform.position = nodeA.transform.position;
