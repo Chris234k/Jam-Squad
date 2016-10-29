@@ -10,11 +10,6 @@ public class LazerWallObstacle : Obstacle
     public float spawnRadius;
     float coolDown;
 
-    void Start()
-    {
-        WasSpawned(null);
-    }
-
     public override void WasSpawned(Spawner spawner)
     {
         nodeA.transform.position = GetPointInSphere(spawnRadius, transform.position);
@@ -34,6 +29,8 @@ public class LazerWallObstacle : Obstacle
             coolDown = Random.Range(1f, 3f);
             InvokeRepeating("Lazer", coolDown, coolDown);
         }
+
+        base.WasSpawned(spawner);
     }
 
     void Lazer()
