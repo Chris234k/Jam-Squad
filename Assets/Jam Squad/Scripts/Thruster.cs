@@ -18,6 +18,7 @@ public class Thruster : AttachablePart
     {
 		selfRigidbody.AddForce(transform.forward * thrustSpeed);
 	}
+
 	public override void DeactivatePart()
     {
 

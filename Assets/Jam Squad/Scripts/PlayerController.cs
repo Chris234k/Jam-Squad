@@ -19,22 +19,40 @@ public class PlayerController : MonoBehaviour
 
     List<Part> activeParts;
 
-	private List<AttachablePart> attachedParts;
+	private List<AttachablePart> attachedParts = new List<AttachablePart>();
     bool gameStarted = false;
+
+    public static PlayerController instance;
+
 	// Use this for initialization
+    void Awake()
+    {
+        instance = this;
+    }
 	void Start ()
     {
+        
         activeParts = new List<Part>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        for (int i = 0; i < activeParts.Count; i++)
+        if (gameStarted == true)
         {
-            if (Input.GetKey(activeParts[i].keyToActivate))
+            for (int i = 0; i < activeParts.Count; i++)
             {
-                activeParts[i].attachedPart.ActivatePart();
+                if (Input.GetKey(activeParts[i].keyToActivate))
+                {
+                    activeParts[i].attachedPart.ActivatePart();
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                StartGame();
             }
         }
 	}
@@ -55,6 +73,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < attachedParts.Count; i++)
         {
             activeParts.Add(new Part(GenerateRandomKeyCode(), attachedParts[i]));
+            Debug.Log(activeParts[i].keyToActivate);
         }
     }
 
