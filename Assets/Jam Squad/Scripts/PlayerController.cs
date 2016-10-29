@@ -138,7 +138,6 @@ public enum KeyboardEnum
     //     Return key.
     //     ///
     Return = 13,
-
     //
     // Summary:
     //     ///
@@ -419,115 +418,6 @@ public enum KeyboardEnum
     //     'z' key.
     //     ///
     Z = 122,
-    //
-    // Summary:
-    //     ///
-    //     The forward delete key.
-    //     ///
-    Delete = 127,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 0.
-    //     ///
-    Keypad0 = 256,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 1.
-    //     ///
-    Keypad1 = 257,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 2.
-    //     ///
-    Keypad2 = 258,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 3.
-    //     ///
-    Keypad3 = 259,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 4.
-    //     ///
-    Keypad4 = 260,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 5.
-    //     ///
-    Keypad5 = 261,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 6.
-    //     ///
-    Keypad6 = 262,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 7.
-    //     ///
-    Keypad7 = 263,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 8.
-    //     ///
-    Keypad8 = 264,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad 9.
-    //     ///
-    Keypad9 = 265,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad '.'.
-    //     ///
-    KeypadPeriod = 266,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad '/'.
-    //     ///
-    KeypadDivide = 267,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad '*'.
-    //     ///
-    KeypadMultiply = 268,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad '-'.
-    //     ///
-    KeypadMinus = 269,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad '+'.
-    //     ///
-    KeypadPlus = 270,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad enter.
-    //     ///
-    KeypadEnter = 271,
-    //
-    // Summary:
-    //     ///
-    //     Numeric keypad '='.
-    //     ///
-    KeypadEquals = 272,
-    //
     // Summary:
     //     ///
     //     Up arrow key.
@@ -551,36 +441,6 @@ public enum KeyboardEnum
     //     Left arrow key.
     //     ///
     LeftArrow = 276,
-    //
-    // Summary:
-    //     ///
-    //     Insert key key.
-    //     ///
-    Insert = 277,
-    //
-    // Summary:
-    //     ///
-    //     Home key.
-    //     ///
-    Home = 278,
-    //
-    // Summary:
-    //     ///
-    //     End key.
-    //     ///
-    End = 279,
-    //
-    // Summary:
-    //     ///
-    //     Page up.
-    //     ///
-    PageUp = 280,
-    //
-    // Summary:
-    //     ///
-    //     Page down.
-    //     ///
-    PageDown = 281,
     //
     // Summary:
     //     ///
@@ -653,12 +513,6 @@ public enum KeyboardEnum
     //     F12 function key.
     //     ///
     F12 = 293,
-    //
-    // Summary:
-    //     ///
-    //     Numlock key.
-    //     ///
-    Numlock = 300,
     //
     // Summary:
     //     ///
