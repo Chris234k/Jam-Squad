@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public class AttachablePart : MonoBehaviour, IAttachablePart {
+public class AttachablePart : MonoBehaviour{
 
 	public static event Action<AttachablePart> OnJointBreak;
 
