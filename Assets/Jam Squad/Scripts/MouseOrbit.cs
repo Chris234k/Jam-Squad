@@ -20,6 +20,8 @@ public class MouseOrbit : MonoBehaviour {
 	float x = 0.0f;
 	float y = 0.0f;
 
+    public GameObject MultiPurposeCameraRig;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -35,6 +37,22 @@ public class MouseOrbit : MonoBehaviour {
 			rigidbody.freezeRotation = true;
 		}
 	}
+
+    void OnEnable()
+    {
+        PlayerController.OnControlEnabled += OnPlayerControlsEnabled;
+    }
+
+    void OnDisable()
+    {
+        PlayerController.OnControlEnabled -= OnPlayerControlsEnabled;
+    }
+       
+    void OnPlayerControlsEnabled()
+    {
+        MultiPurposeCameraRig.SetActive(true);
+        gameObject.SetActive(false);
+    }
 
 	void LateUpdate () 
 	{
