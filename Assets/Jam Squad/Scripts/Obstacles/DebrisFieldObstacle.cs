@@ -33,7 +33,11 @@ public class DebrisFieldObstacle : Obstacle
             randomScale = new Vector3(randomX, randomY, randomZ);
             debris.transform.localScale = randomScale;
 
+            debris.WasSpawned(spawner);
+
             debrisList.Add(debris);
+
+            base.WasSpawned(spawner);
         }
     }
 
