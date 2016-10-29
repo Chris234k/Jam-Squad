@@ -29,9 +29,12 @@ public class TurretScript : AttachablePart
 	public override void Initialize(bool isCursor)
 	{
 		base.Initialize (isCursor);
-		
-		self = GetComponent<Renderer>();
-		bullets = new GameObjectPool(15, bullet, bulletParent);
+
+        if (!isCursor)
+        {
+            self = GetComponent<Renderer>();
+            bullets = new GameObjectPool(15, bullet, bulletParent);
+        }
 	}
 
     void OnTriggerEnter(Collider col)
